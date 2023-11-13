@@ -21,13 +21,13 @@
                 <h4 class="info">
                   <b>Director: </b>
                   <mat-chip-listbox>
-                    <mat-chip-option
+                    <mat-chip [routerLink]="'/person/'+director.id"
                       *ngFor="
                         let director of findDirectors(movieInfo.credits.crew)
                       "
                     >
                       {{ director.name }}
-                    </mat-chip-option>
+                    </mat-chip>
                   </mat-chip-listbox>
                 </h4>
                 <h4 class="info">
