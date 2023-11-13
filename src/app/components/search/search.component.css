@@ -1,0 +1,194 @@
+/* Undoes normalize.css setting box-sizing to content-box */
+input[type="search"] {
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+
+.Search {
+  position: relative;
+  display: flex;
+  font-weight: 300;
+  font-size: 40px;
+  color: #555;
+}
+
+.Search-box {
+  flex: 1 0 auto;
+  margin: 0 12px;
+  padding: 8px 20px;
+  height: 60px;
+  border: 0;
+  box-shadow: 0 3px 12px -1px rgba(0, 0, 0, .3);
+  transition: all .15s ease-in-out;
+}
+
+.Search-box:focus {
+  flex: 1 0 90%;
+  margin: 0;
+  outline: 0;
+}
+
+.Search-label {
+  position: absolute;
+  top: 14px;
+  right: 30px;
+  font-size: 40px;
+  transition: all .15s ease-in-out;
+}
+
+.Search-box:focus + .Search-label {
+  transform: translateX(12px);
+}
+
+
+@media only screen and (max-width: 1200px){
+
+  .Search-label {
+    position: absolute;
+    top: 14px;
+    right: 30px;
+    font-size: 40px;
+    transition: all .15s ease-in-out;
+  }
+
+  
+}
+
+@media only screen and (max-width: 768px){
+  .Search-label {
+    position: absolute;
+    top: 14px;
+    right: 30px;
+    font-size: 20px;
+    transition: all .15s ease-in-out;
+  }
+
+  .Search {
+    position: relative;
+    display: flex;
+    font-weight: 300;
+    font-size: 20px;
+    color: #555;
+  }
+
+  .Search-box {
+    flex: auto;
+    margin: 0 12px;
+    padding: 8px 20px;
+    height: 60px;
+    border: 0;
+    box-shadow: 0 3px 12px -1px rgba(0, 0, 0, .3);
+    transition: all .15s ease-in-out;
+  }
+
+}
+
+@media only screen and (max-width: 560px) {
+  .Search-label {
+    position: absolute;
+    top: 14px;
+    right: 30px;
+    font-size: 20px;
+    transition: all .15s ease-in-out;
+  }
+
+  .Search {
+    position: relative;
+    display: flex;
+    font-weight: 300;
+    font-size: 20px;
+    color: #555;
+  }
+
+  .Search-box {
+    flex: auto;
+    margin: 0 12px;
+    padding: 8px 20px;
+    height: 60px;
+    border: 0;
+    box-shadow: 0 3px 12px -1px rgba(0, 0, 0, .3);
+    transition: all .15s ease-in-out;
+  }
+
+}
+
+
+body{
+  background-color: transparent;
+}
+
+.card {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  background-color: transparent;
+  border-style: none; 
+}
+
+.text-title{
+  font-size: medium;
+  margin-top: 10px;
+  padding-inline: 10px;
+  text-align: center;
+}
+
+h5{
+  font-size: larger;
+  font-weight: 500;
+}
+
+.container{
+  background-color: rgb(124, 230, 203);
+  border-radius: 20px;
+  padding: 15px;
+}
+
+.img-movie{
+  cursor: pointer;
+}
+
+.center{
+  justify-items: center;
+}
+
+.filled {
+  color: #FFD700; /* amarillo */
+}
+
+.card .star{
+  display: inline;
+  color: #faeb1b;
+}
+
+:host {
+  display: block;
+  max-height: 90vh;
+  width: 100%;
+  overflow-y: scroll;
+  scroll-behavior: auto;
+}
+
+:host::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: #f0f0f0; 
+}
+
+:host::-webkit-scrollbar-thumb {
+  background: #ccc;
+}
+
+:host::-webkit-scrollbar-thumb:horizontal,
+::-webkit-scrollbar-thumb:vertical {
+  border-radius: 20px;
+}
+
+:host::-webkit-scrollbar-thumb:active {
+  background: #aaa; 
+}
+
+:host::-webkit-scrollbar-track {
+  background: transparent;
+}

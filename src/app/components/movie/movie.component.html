@@ -1,0 +1,33 @@
+<body>
+  <div class="container" *ngIf="populars.length > 0">
+    <app-slider
+      [videoTitle]="'Peliculas Populares'"
+      [arrayVideosDetail1]="populars"
+      [query]="'popular'"
+    ></app-slider>
+  </div>
+  <br />
+  <div class="container" *ngIf="bestRanking.length > 0">
+    <app-slider
+      [videoTitle]="'Peliculas con Mejor Ranking'"
+      [arrayVideosDetail1]="bestRanking"
+      [query]="'top_rated'"
+    ></app-slider>
+  </div>
+  <br>
+  <div class="container" *ngIf="nowPlaying.length > 0">
+    <app-slider
+      [videoTitle]="'Peliculas En Cartelera'"
+      [arrayVideosDetail1]="nowPlaying"
+      [query]="'now_playing'"
+    ></app-slider>
+  </div>
+  <br>
+  <div class="container" *ngIf="upcoming.length > 0">
+    <app-slider
+      [videoTitle]="'Próximas Peliculas'"
+      [arrayVideosDetail1]="upcoming"
+      [query]="'upcoming'"
+    ></app-slider>
+  </div>
+</body>

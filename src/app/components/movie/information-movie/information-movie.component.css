@@ -1,0 +1,117 @@
+.card{
+  cursor: pointer;
+}
+
+iframe {
+    background-color: black;
+    width: 100%;
+    height: auto;
+    min-height: 40vw;
+  }
+
+.col-info{
+    padding: 0;
+}
+
+li{
+    cursor: pointer;
+}
+
+.latino{
+    color: white;
+}
+
+.container{
+    background-color: rgb(124, 230, 203);
+    border-radius: 20px;
+    padding: 15px;
+}
+h5{
+    font-size: larger;
+    font-weight: 500;
+  }
+p{
+    color: black;
+    text-align: justify;
+}
+
+.info{
+    text-align: left;
+    color: black;
+}
+
+
+
+.video {
+  position: relative;
+  width: 100%;
+}
+
+.img-video{
+  height: 200px;
+  width: 100%;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -120%);
+  padding: 10px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  font-size: 24px;
+  transition: all 0.2s ease;
+}
+
+.video:hover .play {
+  transform: translate(-50%, -120%) scale(1.1);
+}
+
+.video:hover .img-video {
+  filter: blur(3px);
+}
+
+.img-video:hover {
+  filter: blur(3px);
+}
+
+h3{
+  font-size: small;
+  color: gray;
+  font-weight: 500;
+}
+
+h2{
+  font-size: medium;
+  font-weight: bold;
+}
+
+.view {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  font-size: 24px;
+  transition: all 0.2s ease;
+}
+
+.card:hover .view {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.img-video:hover {
+  transform: translate(-1%, -1%) scale(1.1);
+}
+
+
+.card:hover img {
+  filter: blur(3px);
+}

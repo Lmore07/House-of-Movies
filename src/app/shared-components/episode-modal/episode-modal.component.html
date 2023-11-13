@@ -1,0 +1,199 @@
+<div class="container-modal">
+  <ng-container *ngIf="data.api == 'One'"> 
+    <div class="d-flex flex-wrap">
+        <div
+          *ngIf="videosApi1.latino.length > 0"
+          id="latino"
+          class="dropdown flex pt-3 pe-2"
+        >
+          <a
+            class="btn btn-primary dropdown-toggle latino"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Idioma Latino <fa-icon [icon]="faDropwdown"></fa-icon>
+          </a>
+  
+          <ul class="dropdown-menu">
+            <li *ngFor="let item of videosApi1.latino">
+              <a class="dropdown-item" (click)="changeServer(item.result)"
+                >Ver en: {{ item.cyberlocker }}</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div
+          *ngIf="videosApi1.spanish.length > 0"
+          id="español"
+          class="flex dropdown pt-3 pe-2"
+        >
+          <a
+            class="btn btn-secondary dropdown-toggle latino"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Idioma Español <fa-icon [icon]="faDropwdown"></fa-icon>
+          </a>
+          <ul class="dropdown-menu">
+            <li *ngFor="let item of videosApi1.spanish">
+              <a class="dropdown-item" (click)="changeServer(item.result)"
+                >Ver en: {{ item.cyberlocker }}</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div
+          *ngIf="videosApi1.japanese.length > 0"
+          id="japones"
+          class="flex dropdown pt-3 pe-2"
+        >
+          <a
+            class="btn btn-warning dropdown-toggle latino"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Idioma Japones <fa-icon [icon]="faDropwdown"></fa-icon>
+          </a>
+          <ul class="dropdown-menu">
+            <li *ngFor="let item of videosApi1.japanese">
+              <a class="dropdown-item" (click)="changeServer(item.result)"
+                >Ver en: {{ item.cyberlocker }}</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div
+          *ngIf="videosApi1.english.length > 0"
+          id="english"
+          class="flex dropdown pt-3 pe-2"
+        >
+          <a
+            class="btn btn-success dropdown-toggle latino"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Idioma Inglés <fa-icon [icon]="faDropwdown"></fa-icon>
+          </a>
+  
+          <ul class="dropdown-menu">
+            <li *ngFor="let item of videosApi1.english">
+              <a class="dropdown-item" (click)="changeServer(item.result)"
+                >Ver en: {{ item.cyberlocker }}</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div id="download" class="flex dropdown pt-3 pe-2">Descarga</div>
+      </div>
+  </ng-container>
+  <ng-container *ngIf="data.api == 'Two'">
+    <div class="d-flex flex-wrap">
+      <div
+        *ngIf="videosLatino?.length > 0"
+        id="latino"
+        class="dropdown flex pt-3 pe-2"
+      >
+        <a
+          class="btn btn-primary dropdown-toggle latino"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Idioma Latino <fa-icon [icon]="faDropwdown"></fa-icon>
+        </a>
+
+        <ul class="dropdown-menu">
+          <li *ngFor="let item of videosLatino">
+            <a class="dropdown-item" (click)="changeServer(item.url)"
+              >Ver en: {{ item.server }}</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div
+        *ngIf="videosSpanish?.length > 0"
+        id="español"
+        class="flex dropdown pt-3 pe-2"
+      >
+        <a
+          class="btn btn-secondary dropdown-toggle latino"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Idioma Español <fa-icon [icon]="faDropwdown"></fa-icon>
+        </a>
+        <ul class="dropdown-menu">
+          <li *ngFor="let item of videosSpanish">
+            <a class="dropdown-item" (click)="changeServer(item.url)"
+              >Ver en: {{ item.server }}</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div
+        *ngIf="videosJapanese?.length > 0"
+        id="japones"
+        class="flex dropdown pt-3 pe-2"
+      >
+        <a
+          class="btn btn-warning dropdown-toggle latino"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Idioma Japones <fa-icon [icon]="faDropwdown"></fa-icon>
+        </a>
+        <ul class="dropdown-menu">
+          <li *ngFor="let item of videosJapanese">
+            <a class="dropdown-item" (click)="changeServer(item.url)"
+              >Ver en: {{ item.server }}</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div
+        *ngIf="videosEnglish?.length > 0"
+        id="english"
+        class="flex dropdown pt-3 pe-2"
+      >
+        <a
+          class="btn btn-success dropdown-toggle latino"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Idioma Inglés <fa-icon [icon]="faDropwdown"></fa-icon>
+        </a>
+
+        <ul class="dropdown-menu">
+          <li *ngFor="let item of videosEnglish">
+            <a class="dropdown-item" (click)="changeServer(item.url)"
+              >Ver en: {{ item.server }}</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div id="download" class="flex dropdown pt-3 pe-2">Descarga</div>
+    </div></ng-container
+  >
+  <div class="pt-2">
+    <iframe
+      allowfullscreen
+      [src]="safeUrl(videoSelected)"
+      frameborder="0"
+    ></iframe>
+  </div>
+</div>

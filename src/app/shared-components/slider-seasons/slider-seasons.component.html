@@ -1,0 +1,78 @@
+<body class="mt-2">
+  <h5><b class="divider-title">|</b> {{ videoTitle }}</h5>
+  <div>
+    <ng-container *ngIf="api == 'One'">
+      <swiper-container id="serieSlider" slides-per-view="4" navigation="true">
+        <swiper-slide class="center" *ngFor="let season of combinedArray">
+          <div class="card">
+            <img
+              [alt]="season.info.name"
+              class="img-movie shadow p-3 bg-body-tertiary rounded"
+              (click)="goToSeason(season)"
+              [src]="getImage(season.info.poster_path)"
+            />
+            <h3 class="text-title">{{ season.info.name }}</h3>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+      <div *ngIf="selectSeasonOne">
+        <h5>
+          <b class="divider-title">|</b> Episodios: {{ stringSeasonOne }}
+        </h5>
+        <swiper-container
+          id="seasonSlider"
+          slides-per-view="4"
+          navigation="true"
+        >
+          <swiper-slide class="center" *ngFor="let episode of selectSeasonOne">
+            <div class="card">
+              <img
+                [alt]="episode.title"
+                class="img-movie shadow p-1 bg-body-tertiary rounded"
+                (click)="goToView(episode)"
+                [src]="episode.image"
+              />
+              <h3 class="text-title">{{ episode.title }}</h3>
+            </div>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="api == 'Two'">
+      <swiper-container id="serieSlider" slides-per-view="4" navigation="true">
+        <swiper-slide class="center" *ngFor="let season of combinedArray">
+          <div class="card">
+            <img
+              class="img-movie shadow p-3 bg-body-tertiary rounded"
+              (click)="goToSeason(season)"
+              [src]="getImage(season.info.poster_path)"
+            />
+            <h3 class="text-title">{{ season.info.name }}</h3>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+      <div *ngIf="selectSeasonTwo">
+        <h5>
+          <b class="divider-title">|</b> Episodios de la {{ stringSeasonTwo }}
+        </h5>
+        <swiper-container
+          id="seasonSlider"
+          slides-per-view="6"
+          navigation="true"
+        >
+          <swiper-slide class="center" *ngFor="let episode of selectSeasonTwo">
+            <div class="card">
+              <img
+                [alt]="episode.name"
+                class="img-movie shadow p-1 bg-body-tertiary rounded"
+                (click)="goToView(episode)"
+                [src]="getImage2Episode(episode.still_path)"
+              />
+              <h3 class="text-title">{{ episode.name }}</h3>
+            </div>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+    </ng-container>
+  </div>
+</body>

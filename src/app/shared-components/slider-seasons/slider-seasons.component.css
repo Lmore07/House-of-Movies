@@ -1,0 +1,45 @@
+.card {
+    width: auto;
+    height: auto;
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    background-color: transparent;
+    border-style: none; 
+  }
+  
+  .text-title{
+    font-size: medium;
+    margin-top: 10px;
+    padding-inline: 10px;
+    text-align: center;
+  }
+  
+  body{
+    background-color: transparent;
+  }
+  
+  h5{
+    font-size: larger;
+    font-weight: 500;
+  }
+  
+  .img-movie{
+    cursor: pointer;
+  }
+  
+  .center{
+    justify-items: center;
+  }
+  
+  .filled {
+    color: #FFD700; /* amarillo */
+  }
+  
+  .card .star{
+    display: inline;
+    color: #faeb1b;
+  }
+  
+  

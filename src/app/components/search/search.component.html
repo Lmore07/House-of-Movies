@@ -1,0 +1,72 @@
+<body>
+  <div class="Search">
+    <input
+      class="Search-box"
+      [(ngModel)]="query"
+      type="search"
+      id="Search-box"
+      placeholder="Ingrese la pelicula o serie"
+    />
+  </div>
+  <br />
+  <div class="container text-center">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+      <div class="col" *ngFor="let media of dataInfo">
+        <ng-container *ngIf="media.media_type == 'tv'">
+          <div class="card">
+            <img
+              (click)="goToVideoDetail(media)"
+              class="img-movie shadow p-3 bg-body-tertiary rounded"
+              [src]="getImage(media.poster_path)"
+            />
+            <h3 class="text-title">{{ media.name }}</h3>
+            <div class="rating mb-3">
+              <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                <fa-icon
+                  [matTooltip]="
+                    star == 1 ? ' 1 estrella' : star.toString() + ' estrellas'
+                  "
+                  [icon]="faStarOutline"
+                  [class.filled]="star <= getStars(media.vote_average)"
+                >
+                </fa-icon>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="media.media_type == 'movie'">
+            <div class="card">
+              <img
+                (click)="goToVideoDetail(media)"
+                class="img-movie shadow p-3 bg-body-tertiary rounded"
+                [src]="getImage(media.poster_path)"
+              />
+              <h3 class="text-title">{{ media.title }}</h3>
+              <div class="rating mb-3">
+                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                  <fa-icon
+                    [matTooltip]="
+                      star == 1 ? ' 1 estrella' : star.toString() + ' estrellas'
+                    "
+                    [icon]="faStarOutline"
+                    [class.filled]="star <= getStars(media.vote_average)"
+                  >
+                  </fa-icon>
+                </ng-container>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="media.media_type == 'person'">
+            <div class="card">
+              <img
+                (click)="goToVideoDetail(media)"
+                class="img-movie shadow p-3 bg-body-tertiary rounded"
+                [src]="getImage(media.profile_path)"
+              />
+              <h3 class="text-title">{{ media.name }}</h3>
+            </div>
+          </ng-container>
+      </div>
+    </div>
+  </div>
+</body>

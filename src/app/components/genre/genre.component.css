@@ -1,0 +1,80 @@
+.card {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    background-color: transparent;
+    border-style: none; 
+  }
+  
+  .text-title{
+    font-size: medium;
+    margin-top: 10px;
+    padding-inline: 10px;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  
+  body{
+    background-color: transparent;
+  }
+
+  .container{
+    background-color: rgb(124, 230, 203);
+    border-radius: 20px;
+    padding: 15px;
+}
+
+
+  
+:host {
+  display: block;
+  max-height: 90vh;
+  width: 100%;
+  overflow-y: scroll;
+  scroll-behavior: auto;
+}
+
+:host::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: #f0f0f0; 
+}
+
+:host::-webkit-scrollbar-thumb {
+  background: #ccc;
+}
+
+:host::-webkit-scrollbar-thumb:horizontal,
+::-webkit-scrollbar-thumb:vertical {
+  border-radius: 20px;
+}
+
+:host::-webkit-scrollbar-thumb:active {
+  background: #aaa; 
+}
+
+:host::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+  h5{
+    font-size: large;
+    font-weight: 500;
+  }
+  
+  .img-movie{
+    cursor: pointer;
+  }
+  
+  .filled {
+    color: #FFD700; /* amarillo */
+  }
+  
+  .card .star{
+    display: inline;
+    color: #faeb1b;
+  }
+
+

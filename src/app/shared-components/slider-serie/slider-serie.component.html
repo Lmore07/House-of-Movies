@@ -1,0 +1,38 @@
+<body class="mt-2">
+  <div class="d-flex">
+    <div>
+      <h5><b class="divider-title">|</b> {{ videoTitle }}</h5>
+    </div>
+    <div *ngIf="query" class="ms-auto">
+      <a [routerLink]="goToCategory()" class="custom-link"> Explorar más </a>
+    </div>
+  </div>
+  <div>
+    <swiper-container
+      id="serieSlider"
+      slides-per-view="4"
+      navigation="true"
+    >
+      <swiper-slide class="center" *ngFor="let serie of arrayVideosDetail2">
+        <div class="card">
+          <img
+            class="img-movie shadow p-3 bg-body-tertiary rounded"
+            (click)="goToVideoDetail(serie)"
+            [src]="getImage(serie.poster_path)"
+          />
+          <h3 class="text-title">{{ serie.name }}</h3>
+          <div class="rating">
+            <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+              <fa-icon
+                matTooltip="Info about the action"
+                [icon]="faStarOutline"
+                [class.filled]="star <= getStars(serie.vote_average)"
+              >
+              </fa-icon>
+            </ng-container>
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+</body>

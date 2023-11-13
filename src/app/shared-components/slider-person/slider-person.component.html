@@ -1,0 +1,20 @@
+<body class="mt-2">
+    <h5><b class="divider-title">|</b> {{ videoTitle }}</h5>
+    <div>
+      <swiper-container id="swiper-person" slides-per-view="3" mousewheel="true" navigation="true">
+        <swiper-slide class="center" *ngFor="let person of arrayVideosDetail1">
+          <div class="card">
+            <img
+              (click)="goToVideoDetail(person)"
+              class="img-movie shadow p-3 bg-body-tertiary rounded"
+              [src]="getImage(person.profile_path)"
+            />
+            <h3 class="text-name">{{ person.name }}</h3>
+            <h3 *ngIf="person.character" class="text-character"><b>Personaje:</b> {{ person.character }}</h3>
+            <h3 *ngIf="!person.character" class="text-character"> {{ person.known_for_department }}</h3>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+  </body>
+  

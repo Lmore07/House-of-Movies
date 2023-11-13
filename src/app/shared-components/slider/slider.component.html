@@ -1,0 +1,38 @@
+<body class="mt-2">
+  <div class="d-flex">
+    <div>
+      <h5><b class="divider-title">|</b> {{ videoTitle }}</h5>
+    </div>
+    <div *ngIf="query" class="ms-auto">
+      <a [routerLink]="goToCategory()" class="custom-link">
+        Explorar más
+      </a>
+    </div>
+  </div>
+  <div>
+    <swiper-container slides-per-view="3" navigation="true">
+      <swiper-slide class="center" *ngFor="let movie of arrayVideosDetail1">
+        <div class="card">
+          <img
+            (click)="goToVideoDetail(movie)"
+            class="img-movie shadow p-3 bg-body-tertiary rounded"
+            [src]="getImage(movie.poster_path)"
+          />
+          <h3 class="text-title">{{ movie.title }}</h3>
+          <div class="rating">
+            <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+              <fa-icon
+                [matTooltip]="
+                  star == 1 ? ' 1 estrella' : star.toString() + ' estrellas'
+                "
+                [icon]="faStarOutline"
+                [class.filled]="star <= getStars(movie.vote_average)"
+              >
+              </fa-icon>
+            </ng-container>
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+</body>

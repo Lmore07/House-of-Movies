@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+iframe {
+    background-color: black;
+    width: 70vw;
+    height: auto;
+    min-height: 40vw;
+  }
+
+.col-info{
+    padding: 0;
+}
+
+li{
+    cursor: pointer;
+}
+
+.latino{
+    color: white;
+}
+
+
+.container-modal{
+    background-color: white;
+    padding: 15px;
+}
+
+h5{
+    font-size: larger;
+    font-weight: 500;
+  }
+p{
+    color: black;
+    text-align: justify;
+}
+
+.info{
+    text-align: left;
+    color: black;
+}

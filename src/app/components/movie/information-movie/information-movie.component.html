@@ -1,0 +1,286 @@
+<body>
+  <mat-tab-group (selectedIndexChange)="changeTab($event)" class="container">
+    <mat-tab label="Información">
+      <div class="container text-center">
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
+          <div class="d-flex pt-3 col-12 col-md-3 justify-content-center">
+            <img
+              [src]="getImage(movieInfo.poster_path, 250, 325)"
+              [alt]="movieInfo.title"
+            />
+          </div>
+          <div class="pt-3 col-12 col-md-9">
+            <h1 class="fw-bold text-center">{{ movieInfo.title }}</h1>
+            <p>{{ movieInfo.overview }}</p>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 pt-3">
+              <div>
+                <h4 class="info">
+                  <b>Fecha de lanzamiento:</b>
+                  {{ formatDate(movieInfo.release_date) }}
+                </h4>
+                <h4 class="info">
+                  <b>Director: </b>
+                  <mat-chip-listbox>
+                    <mat-chip-option
+                      *ngFor="
+                        let director of findDirectors(movieInfo.credits.crew)
+                      "
+                    >
+                      {{ director.name }}
+                    </mat-chip-option>
+                  </mat-chip-listbox>
+                </h4>
+                <h4 class="info">
+                  <b>Recaudado:</b> {{ formatMoney(movieInfo.revenue) }}
+                </h4>
+                <h4 class="info"><b>Estado:</b> {{ movieInfo.status }}</h4>
+                <h4 class="info">
+                  <b>Producción: </b>
+                  <mat-chip-listbox>
+                    <mat-chip
+                      disabled
+                      *ngFor="let company of movieInfo.production_companies"
+                    >
+                      {{ company.name }}
+                    </mat-chip>
+                  </mat-chip-listbox>
+                </h4>
+              </div>
+              <div>
+                <h4 class="info">
+                  <b>Duración:</b>
+                  {{ convertMinsToHoursMins(movieInfo.runtime) }}
+                </h4>
+                <h4 class="info">
+                  <b>Presupuesto:</b> {{ formatMoney(movieInfo.budget) }}
+                </h4>
+                <h4 class="info">
+                  <b>Genero:</b>
+                  <mat-chip-listbox>
+                    <mat-chip *ngFor="let genre of movieInfo.genres">
+                      {{ genre.name }}
+                    </mat-chip>
+                  </mat-chip-listbox>
+                </h4>
+                <h4 class="info">
+                  <b>Lenguaje:</b> {{ movieInfo.original_language }}
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Videos">
+      <div class="d-flex flex-wrap">
+        <div
+          class="col-md-6 col-6 col-lg-6 p-2"
+          *ngFor="let video of movieInfo.videos.results"
+        >
+          <div class="video p-2">
+            <img (click)="goToVideo(video.key)"
+              class="img-video shadow p-2 bg-body-tertiary rounded"
+              [src]="getImageVideo(video)"
+            />
+
+            <button (click)="goToVideo(video.key)" class="play">
+              <fa-icon [icon]="faPlay"></fa-icon>
+            </button>
+            <h2>{{ video.name }}</h2>
+            <h3>{{ video.type }}</h3>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Fotos">
+      <div>
+        <div class="pb-3">
+          <h5><b class="divider-title">|</b> Backdrops</h5>
+        </div>
+        <div class="d-flex flex-wrap">
+          <div
+            class="col-md-3 col-3 col-lg-3 p-2"
+            *ngFor="let media of movieInfo.images.backdrops"
+          >
+            <div (click)="goToImage(media.file_path)" class="card">
+              <img
+                alt="image"
+                class="img-movie img-fluid shadow p-2 bg-body-tertiary rounded"
+                [src]="getImage(media.file_path, 200, 300)"
+              />
+              <button class="view">
+                <fa-icon [icon]="faEye"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="pb-3">
+          <h5><b class="divider-title">|</b> Logos</h5>
+        </div>
+        <div class="d-flex flex-wrap">
+          <div
+            class="col-md-3 col-3 col-lg-3 p-2"
+            *ngFor="let media of movieInfo.images.logos"
+          >
+            <div (click)="goToImage(media.file_path)" class="card">
+              <img
+                alt="image"
+                class="img-movie img-fluid shadow p-2 bg-body-tertiary rounded"
+                [src]="getImage(media.file_path, 200, 300)"
+              />
+              <button class="view">
+                <fa-icon [icon]="faEye"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="pb-3">
+          <h5><b class="divider-title">|</b> Posters</h5>
+        </div>
+        <div class="d-flex flex-wrap">
+          <div
+            class="col-md-3 col-3 col-lg-3 p-2"
+            *ngFor="let media of movieInfo.images.posters"
+          >
+            <div (click)="goToImage(media.file_path)" class="card">
+              <img
+                alt="image"
+                class="img-movie img-fluid shadow p-2 bg-body-tertiary rounded"
+                [src]="getImage(media.file_path, 200, 300)"
+              />
+              <button class="view">
+                <fa-icon [icon]="faEye"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div *ngIf="selectOverview">
+    <br *ngIf="videos" />
+    <div class="container" *ngIf="videos != undefined">
+      <h5><b class="divider-title">|</b> Ver Película</h5>
+      <div class="d-flex flex-wrap">
+        <div
+          *ngIf="videos.latino.length > 0"
+          id="latino"
+          class="dropdown flex pt-3 pe-2"
+        >
+          <a
+            class="btn btn-primary dropdown-toggle latino"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Idioma Latino <fa-icon [icon]="faDropwdown"></fa-icon>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li *ngFor="let item of videos.latino">
+              <a class="dropdown-item" (click)="changeServer(item.result)"
+                >Ver en: {{ item.cyberlocker }}</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div
+          *ngIf="videos.spanish.length > 0"
+          id="español"
+          class="flex dropdown pt-3 pe-2"
+        >
+          <a
+            class="btn btn-secondary dropdown-toggle latino"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Idioma Español <fa-icon [icon]="faDropwdown"></fa-icon>
+          </a>
+          <ul class="dropdown-menu">
+            <li *ngFor="let item of videos.spanish">
+              <a class="dropdown-item" (click)="changeServer(item.result)"
+                >Ver en: {{ item.cyberlocker }}</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div
+          *ngIf="videos.japanese.length > 0"
+          id="japones"
+          class="flex dropdown pt-3 pe-2"
+        >
+          <a
+            class="btn btn-warning dropdown-toggle latino"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Idioma Japones <fa-icon [icon]="faDropwdown"></fa-icon>
+          </a>
+          <ul class="dropdown-menu">
+            <li *ngFor="let item of videos.japanese">
+              <a class="dropdown-item" (click)="changeServer(item.result)"
+                >Ver en: {{ item.cyberlocker }}</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div
+          *ngIf="videos.english.length > 0"
+          id="english"
+          class="flex dropdown pt-3 pe-2"
+        >
+          <a
+            class="btn btn-success dropdown-toggle latino"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Idioma Inglés <fa-icon [icon]="faDropwdown"></fa-icon>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li *ngFor="let item of videos.english">
+              <a class="dropdown-item" (click)="changeServer(item.result)"
+                >Ver en: {{ item.cyberlocker }}</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div id="download" class="flex dropdown pt-3 pe-2">Descarga</div>
+      </div>
+      <div class="pt-2">
+        <iframe
+          allowfullscreen
+          [src]="safeUrl(videoSelected)"
+          frameborder="0"
+        ></iframe>
+      </div>
+    </div>
+    <br *ngIf="recommendations.length > 0" />
+    <div class="container" *ngIf="recommendations.length > 0">
+      <app-slider
+        [videoTitle]="'Recomendaciones'"
+        [arrayVideosDetail1]="recommendations"
+      ></app-slider>
+    </div>
+    <br *ngIf="movieInfo.credits.cast.length > 0" />
+    <div class="container" *ngIf="movieInfo.credits.cast.length > 0">
+      <app-slider-person
+        [videoTitle]="'Elenco'"
+        [arrayVideosDetail1]="movieInfo.credits.cast"
+      ></app-slider-person>
+    </div>
+  </div>
+</body>

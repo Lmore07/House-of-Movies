@@ -1,0 +1,155 @@
+<body>
+  <div class="container text-center">
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
+      <div class="d-flex pt-3 col-12 col-md-3 justify-content-center">
+        <img
+          [src]="getImage(personInfo.profile_path, 250, 325)"
+          [alt]="personInfo.title"
+        />
+      </div>
+      <div class="pt-3 col-12 col-md-9">
+        <h1 class="fw-bold text-center">{{ personInfo.name }}</h1>
+        <p>{{ personInfo.biography }}</p>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 pt-3">
+          <div>
+            <h4 class="info">
+              <b>Fecha de Nacimiento:</b>
+              {{ formatDate(personInfo.birthday) }}
+            </h4>
+            <h4 class="info" *ngIf="personInfo.deathday">
+              <b>Fecha de Muerte:</b>
+              {{ formatDate(personInfo.deathday) }}
+            </h4>
+            <h4 class="info">
+              <b>Conocido por:</b> {{ personInfo.known_for_department }}
+            </h4>
+          </div>
+          <div>
+            <h4 class="info">
+              <b>Lugar de Nacimiento:</b>
+              {{ personInfo.place_of_birth }}
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <mat-tab-group class="container">
+    <mat-tab label="Conocido por">
+      <div class="container text-center">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+          <div class="col" *ngFor="let media of known_for">
+            <ng-container *ngIf="media.media_type == 'tv'">
+              <div class="card">
+                <img
+                  alt="image"
+                  (click)="goToVideoDetail(media)"
+                  class="img-movie shadow p-3 bg-body-tertiary rounded"
+                  [src]="getImage(media.poster_path, 200, 300)"
+                />
+                <h3 class="text-title">{{ media.name }}</h3>
+                <div class="rating mb-3">
+                  <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                    <fa-icon
+                      [matTooltip]="
+                        star == 1
+                          ? ' 1 estrella'
+                          : star.toString() + ' estrellas'
+                      "
+                      [icon]="faStarOutline"
+                      [class.filled]="star <= getStars(media.vote_average)"
+                    >
+                    </fa-icon>
+                  </ng-container>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="media.media_type == 'movie'">
+              <div class="card">
+                <img
+                  alt="image"
+                  (click)="goToVideoDetail(media)"
+                  class="img-movie shadow p-3 bg-body-tertiary rounded"
+                  [src]="getImage(media.poster_path, 200, 300)"
+                />
+                <h3 class="text-title">{{ media.title }}</h3>
+                <div class="rating mb-3">
+                  <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                    <fa-icon
+                      [matTooltip]="
+                        star == 1
+                          ? ' 1 estrella'
+                          : star.toString() + ' estrellas'
+                      "
+                      [icon]="faStarOutline"
+                      [class.filled]="star <= getStars(media.vote_average)"
+                    >
+                    </fa-icon>
+                  </ng-container>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Créditos">
+      <div class="container">
+        <mat-accordion class="shadow mat-elevation-z0">
+          <mat-expansion-panel class="mat-elevation-z0">
+            <mat-expansion-panel-header>
+              <mat-panel-title> Créditos por actuar</mat-panel-title>
+              <mat-panel-description>
+                Créditos obtenidos por actuación
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ul>
+              <li *ngFor="let item of personInfo.combined_credits.cast">
+                <span [matTooltip]="item.media_type" class="type">{{
+                  getItemType(item)
+                }}</span>
+                <b>{{ item.name ?? item.title }}</b> <br />
+                Interpreta a: {{ item.character }}
+              </li>
+            </ul>
+          </mat-expansion-panel>
+          <mat-expansion-panel class="mat-elevation-z0">
+            <mat-expansion-panel-header>
+              <mat-panel-title> Créditos por producción</mat-panel-title>
+              <mat-panel-description>
+                Créditos obtenidos por estar dentro de la producción
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ul>
+              <li *ngFor="let item of personInfo.combined_credits.crew">
+                <span [matTooltip]="item.media_type" class="type">{{
+                  getItemType(item)
+                }}</span>
+                <b>{{ item.name ?? item.title }}</b> <br />
+                Trabajó de: {{ item.job }}
+              </li>
+            </ul>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Fotos">
+      <div class="container text-center">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+          <div class="col mb-3" *ngFor="let media of personInfo.images.profiles">
+            <div class="card">
+              <img
+                alt="image"
+                class="img-movie shadow p-3 bg-body-tertiary rounded"
+                [src]="getImage(media.file_path, 200, 300)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</body>
