@@ -18,7 +18,7 @@ register();
   templateUrl: './slider-serie.component.html',
   styleUrls: ['./slider-serie.component.css'],
 })
-export class SliderSerieComponent implements OnChanges{
+export class SliderSerieComponent implements OnChanges {
   /*Vector de prueba*/
   @Input() carouselExample: string = '';
   @Input() arrayVideosDetail2: any[] = [];
@@ -43,7 +43,7 @@ export class SliderSerieComponent implements OnChanges{
   }
 
   goToCategory() {
-    return '/serie/category/' + this.query
+    return '/serie/category/' + this.query;
   }
 
   @HostListener('window:resize')
@@ -53,7 +53,6 @@ export class SliderSerieComponent implements OnChanges{
 
   checkWidth() {
     const width = window.innerWidth;
-    console.log(width);
     const swiperEl = document.getElementById('serieSlider');
     if (width >= 1200) {
       swiperEl?.setAttribute('slides-per-view', '4');
@@ -78,8 +77,10 @@ export class SliderSerieComponent implements OnChanges{
   }
 
   goToVideoDetail(video: any) {
-    this.route.navigate(['/serie', video.id], { skipLocationChange: false }).then(() => {
-      this.route.navigate(['/serie', video.id]);
-    });
+    this.route
+      .navigate(['/serie', video.id], { skipLocationChange: false })
+      .then(() => {
+        this.route.navigate(['/serie', video.id]);
+      });
   }
 }

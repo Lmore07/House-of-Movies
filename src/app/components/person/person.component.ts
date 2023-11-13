@@ -40,11 +40,8 @@ export class PersonComponent {
   loadPerson() {
     this.infoService.getInfoPerson(this.personId).subscribe(
       (data) => {
-        console.log(data);
         this.known_for = data.combined_credits.cast;
         this.known_for = this.known_for.concat(data.combined_credits.crew);
-        console.log('known for')
-        console.log(this.known_for)
         this.personInfo = data;
       },
       (error) => {

@@ -40,7 +40,6 @@ export class SliderSeasonsComponent implements OnChanges, OnInit {
   ) {}
 
   goToView(episode: any) {
-    console.log(episode);
     this.dialog.open(EpisodeModalComponent, {
       data: {
         link: episode,
@@ -52,14 +51,12 @@ export class SliderSeasonsComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     this.checkWidth();
     this.combinedArray = [];
-    console.log(this.infoSeasons);
     for (let i = 0; i < this.infoSeasons.length; i++) {
       this.combinedArray.push({
         view: this.seasons[i],
         info: this.infoSeasons[i],
       });
     }
-    console.log(this.combinedArray);
     if (this.api == 'One') {
       this.selectSeasonOne = this.combinedArray[0].view.episodes;
       this.stringSeasonOne = this.combinedArray[0].info.name;

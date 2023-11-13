@@ -29,7 +29,6 @@ export class SearchComponent {
 
   ngOnInit() {
     this.searchSubject.pipe(debounceTime(500)).subscribe((searchTerm) => {
-      console.log('Realizar petición de búsqueda para:', searchTerm);
       this.loadData(1);
     });
   }
@@ -38,7 +37,6 @@ export class SearchComponent {
     this.infoService.searchMedia(this.query, page).subscribe(
       (data) => {
         this.dataInfo = data.results;
-        console.log(this.dataInfo);
         this.maxPages = data.total_pages;
       },
       (error) => {
@@ -59,7 +57,6 @@ export class SearchComponent {
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.target instanceof HTMLInputElement) {
       if (this.query !== null && this.query != '' && this.query != undefined) {
-        console.log(this.query);
         this.searchSubject.next(this.query);
       }
     }
@@ -68,11 +65,7 @@ export class SearchComponent {
   loadMorePages() {
     this.infoService.searchMedia(this.query, this.page).subscribe(
       (data) => {
-        console.log('Loading media');
-        console.log(data);
         this.dataInfo = this.dataInfo.concat(data.results);
-        console.log('Data loaded');
-        console.log(this.dataInfo);
       },
       (error) => {
         console.log(error);

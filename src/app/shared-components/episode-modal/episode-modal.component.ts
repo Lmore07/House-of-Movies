@@ -43,17 +43,13 @@ export class EpisodeModalComponent {
   }
 
   loadVideosApiOne() {
-    console.log('Loading videos API 1');
-    console.log(this.data.link);
     let url = this.data.link.url.slug
       .replace('series', 'serie')
       .replace('seasons', 'temporada')
       .replace('episodes', 'episodio');
-      console.log(url);
     this.viewService.viewAndDownloadSerie(url).subscribe(
       (data) => {
         this.videosApi1=data.pageProps.episode.videos
-        console.log(this.videosApi1)
         this.videoSelected=this.videosApi1.latino[0].result
       },
       (error) => {
@@ -63,22 +59,17 @@ export class EpisodeModalComponent {
   }
 
   loadVideosApiTwo() {
-    console.log('Loading videos API 2');
-    console.log(this.data);
     this.videos = this.data.link.embeds;
     this.videosLatino = this.videos.filter(
       (objeto) => objeto.audio == 'LATINO'
     );
-    console.log(this.videosLatino);
     this.videosEnglish = this.videos.filter(
       (objeto) => objeto.audio == 'INGLES'
     );
-    console.log(this.videosEnglish);
     this.videosSpanish = this.videos.filter(
       (objeto) => objeto.audio == 'ESPAÑOL'
     );
     this.videoSelected = this.videosLatino[0].url;
-    console.log(this.videoSelected);
   }
   safeUrl(url: string) {
     try {

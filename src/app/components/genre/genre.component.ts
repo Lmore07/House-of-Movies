@@ -28,7 +28,6 @@ export class GenreComponent {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      console.log(JSON.stringify(params));
       this.type = params.get('type')! as MediaType;
       if (this.type == 'serie') {
         this.type = 'tv';
@@ -55,7 +54,6 @@ export class GenreComponent {
   loadData(page: number = 1) {
     this.infoService.getMediaByGenre(this.idGenre, this.type, page).subscribe(
       (data) => {
-        console.log(data);
         this.dataInfo = data.results;
         this.maxPages = data.total_pages;
       },
@@ -70,11 +68,7 @@ export class GenreComponent {
       .getMediaByGenre(this.idGenre, this.type, this.page)
       .subscribe(
         (data) => {
-          console.log('Loading media');
-          console.log(data);
           this.dataInfo = this.dataInfo.concat(data.results);
-          console.log('Data loaded');
-          console.log(this.dataInfo);
         },
         (error) => {
           console.log(error);
@@ -85,7 +79,6 @@ export class GenreComponent {
   @HostListener('scroll', ['$event.target'])
   onScroll(elem: any) {
     if (elem.offsetHeight + elem.scrollTop >= elem.scrollHeight) {
-      console.log("It's Lit");
       this.page++;
       this.loadMorePages();
     }
