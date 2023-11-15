@@ -1,4 +1,5 @@
 <body>
+  <loading *ngIf="loading"></loading>
   <div class="container" *ngIf="populars.length > 0">
     <app-slider
       [videoTitle]="'Peliculas Populares'"

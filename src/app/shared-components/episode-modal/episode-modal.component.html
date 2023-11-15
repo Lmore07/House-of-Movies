@@ -13,7 +13,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Idioma Latino <fa-icon [icon]="faDropwdown"></fa-icon>
+            Idioma Latino 
           </a>
   
           <ul class="dropdown-menu">
@@ -36,7 +36,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Idioma Español <fa-icon [icon]="faDropwdown"></fa-icon>
+            Idioma Español 
           </a>
           <ul class="dropdown-menu">
             <li *ngFor="let item of videosApi1.spanish">
@@ -58,7 +58,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Idioma Japones <fa-icon [icon]="faDropwdown"></fa-icon>
+            Idioma Japones 
           </a>
           <ul class="dropdown-menu">
             <li *ngFor="let item of videosApi1.japanese">
@@ -80,7 +80,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Idioma Inglés <fa-icon [icon]="faDropwdown"></fa-icon>
+            Idioma Inglés 
           </a>
   
           <ul class="dropdown-menu">
@@ -91,7 +91,12 @@
             </li>
           </ul>
         </div>
-        <div id="download" class="flex dropdown pt-3 pe-2">Descarga</div>
+        <div class="ms-md-auto ms-0 ms-sm-0 ms-lg-auto flex pt-3 pe-2">
+          <button class="btn-download" (click)="goToDownload()">
+            <fa-icon [icon]="faDownload"></fa-icon>
+            Descargar
+          </button>
+        </div>
       </div>
   </ng-container>
   <ng-container *ngIf="data.api == 'Two'">

@@ -74,6 +74,13 @@ export class SliderSeasonsComponent implements OnChanges, OnInit {
         info: this.infoSeasons[i],
       });
     }
+    if (this.api == 'One') {
+      this.selectSeasonOne = this.combinedArray[0].view.episodes;
+      this.stringSeasonOne = this.combinedArray[0].info.name;
+    } else if (this.api == 'Two') {
+      this.selectSeasonTwo = this.combinedArray[0].view;
+      this.stringSeasonTwo = this.combinedArray[0].info.name;
+    }
     this.checkWidth();
   }
 

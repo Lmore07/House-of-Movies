@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InformationService } from 'src/app/services/information.service';
 import * as iconos from '@fortawesome/free-solid-svg-icons';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-person',
@@ -15,12 +16,18 @@ export class PersonComponent {
   faStarOutline = iconos.faStar;
   faQuestion = iconos.faQuestion;
   panelOpenState = false;
+  loading = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private loadingService: LoadingService,
     private infoService: InformationService
-  ) {}
+  ) {
+    this.loadingService.loading$.subscribe((loading) => {
+      this.loading = loading;
+    });
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -30,7 +37,7 @@ export class PersonComponent {
   }
 
   getItemType(item: any) {
-    if(item.media_type === 'movie') {
+    if (item.media_type === 'movie') {
       return '🎬'; // o 'Movie'
     } else {
       return '📺'; // o 'TV'

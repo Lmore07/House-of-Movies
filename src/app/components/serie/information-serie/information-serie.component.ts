@@ -7,6 +7,7 @@ import { ViewService } from 'src/app/services/view.service';
 import { MatDialog } from '@angular/material/dialog';
 import { WatchVideoInfoComponent } from 'src/app/shared-components/watch-video-info/watch-video-info.component';
 import { WatchImageComponent } from 'src/app/shared-components/watch-image/watch-image.component';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-information-serie',
@@ -25,7 +26,7 @@ export class InformationSerieComponent implements OnDestroy, OnInit {
   seasons!: [];
   faPlay = iconos.faPlay;
   faEye = iconos.faEye;
-
+  loading = false;
   selectOverview: boolean = true;
 
   constructor(
@@ -33,9 +34,14 @@ export class InformationSerieComponent implements OnDestroy, OnInit {
     private router: Router,
     private infoService: InformationService,
     private viewService: ViewService,
+    private loadingService: LoadingService,
     public dialog: MatDialog,
     private sanitizer: DomSanitizer
-  ) {}
+  ) {
+    this.loadingService.loading$.subscribe((loading) => {
+      this.loading = loading;
+    });
+  }
 
   ngOnDestroy(): void {}
 
@@ -95,7 +101,6 @@ export class InformationSerieComponent implements OnDestroy, OnInit {
       },
     });
   }
-
 
   getImageVideo(video: any) {
     return this.infoService.getImageYoutube(video.key, 400, 600);

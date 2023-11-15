@@ -1,18 +1,27 @@
 import { Component } from '@angular/core';
 import { InformationService } from 'src/app/services/information.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-serie',
   templateUrl: './serie.component.html',
-  styleUrls: ['./serie.component.css']
+  styleUrls: ['./serie.component.css'],
 })
 export class SerieComponent {
-
   populars!: any[];
   bestRanking!: any[];
   nowPlaying!: any[];
+  counter = 0;
+  loading = false;
 
-  constructor(private infoService: InformationService) {}
+  constructor(
+    private infoService: InformationService,
+    private loadingService: LoadingService
+  ) {
+    this.loadingService.loading$.subscribe((loading) => {
+      this.loading = loading;
+    });
+  }
 
   ngOnInit() {
     this.loadPopulars();

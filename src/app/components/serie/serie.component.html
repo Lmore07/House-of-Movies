@@ -1,27 +1,27 @@
 <body>
-    <div class="container" *ngIf="populars.length > 0">
-      <app-slider-serie
-        [videoTitle]="'Series Populares'"
-        [arrayVideosDetail2]="populars"
-        [query]="'popular'"
-      ></app-slider-serie>
-    </div>
-    <br />
-    <div class="container" *ngIf="bestRanking.length > 0">
-      <app-slider-serie
-        [videoTitle]="'Series con Mejor Ranking'"
-        [arrayVideosDetail2]="bestRanking"
-        [query]="'top_rated'"
-      ></app-slider-serie>
-    </div>
-    <br>
-    <div class="container" *ngIf="nowPlaying.length > 0">
-      <app-slider-serie
-        [videoTitle]="'Series emitidas actualmente'"
-        [arrayVideosDetail2]="nowPlaying"
-        [query]="'airing_today'"
-      ></app-slider-serie>
-    </div>
-    <br>
-  </body>
-  
+  <loading *ngIf="loading"></loading>
+  <div class="container" *ngIf="populars.length > 0">
+    <app-slider-serie
+      [videoTitle]="'Series Populares'"
+      [arrayVideosDetail2]="populars"
+      [query]="'popular'"
+    ></app-slider-serie>
+  </div>
+  <br />
+  <div class="container" *ngIf="bestRanking.length > 0">
+    <app-slider-serie
+      [videoTitle]="'Series con Mejor Ranking'"
+      [arrayVideosDetail2]="bestRanking"
+      [query]="'top_rated'"
+    ></app-slider-serie>
+  </div>
+  <br />
+  <div class="container" *ngIf="nowPlaying.length > 0">
+    <app-slider-serie
+      [videoTitle]="'Series emitidas actualmente'"
+      [arrayVideosDetail2]="nowPlaying"
+      [query]="'airing_today'"
+    ></app-slider-serie>
+  </div>
+  <br />
+</body>

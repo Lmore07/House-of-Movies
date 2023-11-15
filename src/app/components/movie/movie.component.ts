@@ -11,6 +11,8 @@ export class MovieComponent {
   bestRanking!: any[];
   upcoming!: any[];
   nowPlaying!: any[];
+  counter = 0;
+  loading = true;
 
   constructor(private infoService: InformationService) {}
 
@@ -24,9 +26,14 @@ export class MovieComponent {
   loadPopulars() {
     this.infoService.listMedia('movie', 'popular', 1).subscribe(
       (data) => {
+        this.counter++;
+        if (this.counter == 4) {
+          this.loading = false;
+        }
         this.populars = data.results;
       },
       (error) => {
+        this.loading=false;
         console.log(error);
       }
     );
@@ -35,9 +42,14 @@ export class MovieComponent {
   loadBestRanking() {
     this.infoService.listMedia('movie', 'top_rated', 1).subscribe(
       (data) => {
+        this.counter++;
+        if (this.counter == 4) {
+          this.loading = false;
+        }
         this.bestRanking = data.results;
       },
       (error) => {
+        this.loading=false;
         console.log(error);
       }
     );
@@ -46,9 +58,14 @@ export class MovieComponent {
   loadUpcoming() {
     this.infoService.listMedia('movie', 'upcoming', 1).subscribe(
       (data) => {
+        this.counter++;
+        if (this.counter == 4) {
+          this.loading = false;
+        }
         this.upcoming = data.results;
       },
       (error) => {
+        this.loading=false;
         console.log(error);
       }
     );
@@ -57,9 +74,14 @@ export class MovieComponent {
   loadNowPlaying() {
     this.infoService.listMedia('movie', 'now_playing', 1).subscribe(
       (data) => {
+        this.counter++;
+        if (this.counter == 4) {
+          this.loading = false;
+        }
         this.nowPlaying = data.results;
       },
       (error) => {
+        this.loading=false;
         console.log(error);
       }
     );

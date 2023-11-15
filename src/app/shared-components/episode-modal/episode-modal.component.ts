@@ -1,8 +1,9 @@
 import { ViewService } from 'src/app/services/view.service';
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as iconos from '@fortawesome/free-solid-svg-icons';
+import { DownloadComponent } from '../download/download.component';
 
 interface video {
   audio: string;
@@ -22,6 +23,7 @@ export class EpisodeModalComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private sanitizer: DomSanitizer,
+    public dialog: MatDialog,
     private viewService: ViewService
   ) {}
 
@@ -33,6 +35,8 @@ export class EpisodeModalComponent {
   videos: video[] = [];
   videosApi1!: any;
   videoSelected!: string;
+  faDownload = iconos.faDownload;
+  download: any[] = [];
 
   ngOnInit() {
     if (this.data.api == 'One') {
@@ -49,13 +53,34 @@ export class EpisodeModalComponent {
       .replace('episodes', 'episodio');
     this.viewService.viewAndDownloadSerie(url).subscribe(
       (data) => {
-        this.videosApi1=data.pageProps.episode.videos
-        this.videoSelected=this.videosApi1.latino[0].result
+        this.videosApi1 = data.pageProps.episode.videos;
+        this.download = data.pageProps.episode.videos;
+        this.videoSelected = this.videosApi1.latino[0].result;
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  goToDownload() {
+    const combinedArray = Object.entries(this.download).reduce(
+      (accumulator, [language, currentArray]) => {
+        const arrayWithLanguage = currentArray.map((obj: any) => ({
+          ...obj,
+          language: language,
+        }));
+        return accumulator.concat(arrayWithLanguage);
+      },
+      []
+    );
+
+    console.log(combinedArray);
+    this.dialog.open(DownloadComponent, {
+      data: {
+        download: combinedArray,
+      },
+    });
   }
 
   loadVideosApiTwo() {
@@ -71,6 +96,7 @@ export class EpisodeModalComponent {
     );
     this.videoSelected = this.videosLatino[0].url;
   }
+
   safeUrl(url: string) {
     try {
       return this.sanitizer.bypassSecurityTrustResourceUrl(url);

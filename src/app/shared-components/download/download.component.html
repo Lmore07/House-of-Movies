@@ -1,0 +1,27 @@
+<body>
+  <table class="video-table table-bordered">
+    <tr>
+      <th>Servidor</th>
+      <th>Lenguaje</th>
+      <th>Calidad</th>
+    </tr>
+    <tbody class="table-group-divider">
+      <tr *ngFor="let video of data.download">
+        <td style="text-transform: capitalize">{{ video.cyberlocker }}</td>
+
+        <td style="text-transform: capitalize">{{ video.language }}</td>
+
+        <td>{{ video.quality }}</td>
+
+        <td>
+          <a [href]="video.result" target="_blank">
+            <button class="download-btn">
+              <fa-icon [icon]="faDownload"></fa-icon>
+              Descargar
+            </button>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>

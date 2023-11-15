@@ -7,6 +7,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { WatchVideoInfoComponent } from 'src/app/shared-components/watch-video-info/watch-video-info.component';
 import { WatchImageComponent } from 'src/app/shared-components/watch-image/watch-image.component';
+import { LoadingService } from 'src/app/services/loading.service';
+import { DownloadComponent } from 'src/app/shared-components/download/download.component';
 
 @Component({
   selector: 'app-information-movie',
@@ -17,13 +19,19 @@ export class InformationMovieComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private loadingService: LoadingService,
     private infoService: InformationService,
     private viewService: ViewService,
     private sanitizer: DomSanitizer,
     public dialog: MatDialog
-  ) {}
+  ) {
+    this.loadingService.loading$.subscribe((loading) => {
+      this.loading = loading;
+    });
+  }
 
   movieId!: number;
+  loading = false;
   recommendations!: any[];
   movieInfo: any;
   faDropwdown = iconos.faChevronDown;
@@ -33,6 +41,7 @@ export class InformationMovieComponent {
   videoSelected!: string;
   selectOverview: boolean = true;
   faEye = iconos.faEye;
+  faDownload = iconos.faDownload;
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -59,7 +68,6 @@ export class InformationMovieComponent {
     });
   }
 
-
   getImage(image: string, width: number, height: number) {
     return this.infoService._fetchImage(image, width, height);
   }
@@ -69,11 +77,12 @@ export class InformationMovieComponent {
   }
 
   changeTab(event: any) {
-    if (event.index != 0) {
+    if (event != 0) {
       this.selectOverview = false;
     } else {
       this.selectOverview = true;
     }
+    console.log(this.selectOverview);
   }
 
   getViewAndDownload() {
@@ -87,6 +96,14 @@ export class InformationMovieComponent {
         console.log(error);
       }
     );
+  }
+
+  goToDownload() {
+    this.dialog.open(DownloadComponent, {
+      data: {
+        download: this.download,
+      },
+    });
   }
 
   changeServer(url: string) {

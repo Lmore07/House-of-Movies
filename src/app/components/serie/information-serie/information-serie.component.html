@@ -1,4 +1,5 @@
 <body>
+  <loading *ngIf="loading"></loading>
   <mat-tab-group
     (selectedTabChange)="changeTab($event)"
     class="container"
@@ -8,40 +9,40 @@
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
           <div class="d-flex pt-3 col-12 col-md-3 justify-content-center">
             <img
-              [src]="getImage(infoSerie.poster_path, 250, 325)"
-              [alt]="infoSerie.name"
+              [src]="getImage(infoSerie?.poster_path, 250, 325)"
+              [alt]="infoSerie?.name"
             />
           </div>
           <div class="pt-3 col-12 col-md-9">
-            <h1 class="fw-bold text-center">{{ infoSerie.name }}</h1>
-            <p>{{ infoSerie.overview }}</p>
+            <h1 class="fw-bold text-center">{{ infoSerie?.name }}</h1>
+            <p>{{ infoSerie?.overview }}</p>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 pt-3">
               <div>
                 <h4 class="info">
                   <b>Primer episodio:</b>
-                  {{ formatDate(infoSerie.first_air_date) }}
+                  {{ formatDate(infoSerie?.first_air_date) }}
                 </h4>
                 <h4 class="info">
                   <b>Último episodio:</b>
-                  {{ formatDate(infoSerie.last_air_date) }}
+                  {{ formatDate(infoSerie?.last_air_date) }}
                 </h4>
-                <h4 class="info"><b>Estado:</b> {{ infoSerie.status }}</h4>
+                <h4 class="info"><b>Estado:</b> {{ infoSerie?.status }}</h4>
                 <h4 class="info">
                   <b>Producción: </b>
                   <mat-chip-listbox>
                     <mat-chip
                       disabled
-                      *ngFor="let company of infoSerie.production_companies"
+                      *ngFor="let company of infoSerie?.production_companies"
                     >
-                      {{ company.name }}
+                      {{ company?.name }}
                     </mat-chip>
                   </mat-chip-listbox>
                 </h4>
               </div>
               <div>
-                <h4 *ngIf="infoSerie.next_episode_to_air" class="info">
+                <h4 *ngIf="infoSerie?.next_episode_to_air" class="info">
                   <b>Próximo episodio:</b>
-                  {{ formatDate(infoSerie.next_episode_to_air.air_date) }}
+                  {{ formatDate(infoSerie?.next_episode_to_air.air_date) }}
                 </h4>
                 <h4 class="info">
                   <b>Genero:</b>
@@ -49,14 +50,14 @@
                     <mat-chip
                       class="chip"
                       [routerLink]="'/genre/' + genre.id + '/' + 'serie'"
-                      *ngFor="let genre of infoSerie.genres"
+                      *ngFor="let genre of infoSerie?.genres"
                     >
-                      {{ genre.name }}
+                      {{ genre?.name }}
                     </mat-chip>
                   </mat-chip-listbox>
                 </h4>
                 <h4 class="info">
-                  <b>Lenguaje:</b> {{ infoSerie.original_language }}
+                  <b>Lenguaje:</b> {{ infoSerie?.original_language }}
                 </h4>
               </div>
             </div>
@@ -65,11 +66,11 @@
       </div>
     </mat-tab>
 
-    <mat-tab *ngIf="infoSerie.videos.results.length > 0" label="Videos">
+    <mat-tab *ngIf="infoSerie?.videos?.results?.length > 0" label="Videos">
       <div class="d-flex flex-wrap">
         <div
           class="col-md-6 col-12 col-lg-6 p-2"
-          *ngFor="let video of infoSerie.videos.results"
+          *ngFor="let video of infoSerie?.videos?.results"
         >
           <div class="video p-2">
             <img
@@ -77,31 +78,31 @@
               [src]="getImageVideo(video)"
             />
 
-            <button (click)="goToVideo(video.key)" class="play">
+            <button (click)="goToVideo(video?.key)" class="play">
               <fa-icon [icon]="faPlay"></fa-icon>
             </button>
-            <h2>{{ video.name }}</h2>
-            <h3>{{ video.type }}</h3>
+            <h2>{{ video?.name }}</h2>
+            <h3>{{ video?.type }}</h3>
           </div>
         </div>
       </div>
     </mat-tab>
 
-    <mat-tab *ngIf="infoSerie.images" label="Fotos">
-      <div *ngIf="infoSerie.images.backdrops.length > 0">
-        <div class="pb-3">
+    <mat-tab *ngIf="infoSerie?.images" label="Fotos">
+      <div *ngIf="infoSerie.images?.backdrops?.length > 0">
+        <div class="pt-2 pb-2">
           <h5><b class="divider-title">|</b> Backdrops</h5>
         </div>
         <div class="d-flex flex-wrap">
           <div
             class="col-md-3 col-3 col-lg-3 p-2"
-            *ngFor="let media of infoSerie.images.backdrops"
+            *ngFor="let media of infoSerie.images?.backdrops"
           >
-            <div (click)="goToImage(media.file_path)" class="card">
+            <div (click)="goToImage(media?.file_path)" class="card">
               <img
                 alt="image"
                 class="img-movie img-fluid shadow p-2 bg-body-tertiary rounded"
-                [src]="getImage(media.file_path, 200, 300)"
+                [src]="getImage(media?.file_path, 200, 300)"
               />
               <button class="view">
                 <fa-icon [icon]="faEye"></fa-icon>
@@ -111,7 +112,7 @@
         </div>
       </div>
       <div *ngIf="infoSerie.images.logos.length > 0">
-        <div class="pb-3">
+        <div class="pt-2 pb-2">
           <h5><b class="divider-title">|</b> Logos</h5>
         </div>
         <div class="d-flex flex-wrap">
@@ -133,7 +134,7 @@
         </div>
       </div>
       <div *ngIf="infoSerie.images.posters.length > 0">
-        <div class="pb-3">
+        <div class="pt-2 pb-2">
           <h5><b class="divider-title">|</b> Posters</h5>
         </div>
         <div class="d-flex flex-wrap">

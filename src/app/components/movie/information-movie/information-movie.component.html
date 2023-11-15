@@ -1,4 +1,5 @@
 <body>
+  <loading *ngIf="loading"></loading>
   <mat-tab-group (selectedIndexChange)="changeTab($event)" class="container">
     <mat-tab label="Información">
       <div class="container text-center">
@@ -21,7 +22,8 @@
                 <h4 class="info">
                   <b>Director: </b>
                   <mat-chip-listbox>
-                    <mat-chip [routerLink]="'/person/'+director.id"
+                    <mat-chip
+                      [routerLink]="'/person/' + director.id"
                       *ngFor="
                         let director of findDirectors(movieInfo.credits.crew)
                       "
@@ -72,43 +74,45 @@
       </div>
     </mat-tab>
 
-    <mat-tab label="Videos">
+    <mat-tab *ngIf="movieInfo.videos?.results.length > 0" label="Videos">
       <div class="d-flex flex-wrap">
         <div
           class="col-md-6 col-6 col-lg-6 p-2"
-          *ngFor="let video of movieInfo.videos.results"
+          *ngFor="let video of movieInfo.videos?.results"
         >
           <div class="video p-2">
-            <img (click)="goToVideo(video.key)"
+            <img
+              (click)="goToVideo(video?.key)"
+              alt="image"
               class="img-video shadow p-2 bg-body-tertiary rounded"
               [src]="getImageVideo(video)"
             />
 
-            <button (click)="goToVideo(video.key)" class="play">
+            <button (click)="goToVideo(video?.key)" class="play">
               <fa-icon [icon]="faPlay"></fa-icon>
             </button>
-            <h2>{{ video.name }}</h2>
-            <h3>{{ video.type }}</h3>
+            <h2>{{ video?.name }}</h2>
+            <h3>{{ video?.type }}</h3>
           </div>
         </div>
       </div>
     </mat-tab>
 
-    <mat-tab label="Fotos">
-      <div>
-        <div class="pb-3">
+    <mat-tab *ngIf="movieInfo.images != undefined" label="Fotos">
+      <div *ngIf="movieInfo.images?.backdrops?.length > 0">
+        <div class="pt-2 pb-2">
           <h5><b class="divider-title">|</b> Backdrops</h5>
         </div>
         <div class="d-flex flex-wrap">
           <div
             class="col-md-3 col-3 col-lg-3 p-2"
-            *ngFor="let media of movieInfo.images.backdrops"
+            *ngFor="let media of movieInfo.images?.backdrops"
           >
-            <div (click)="goToImage(media.file_path)" class="card">
+            <div (click)="goToImage(media?.file_path)" class="card">
               <img
                 alt="image"
                 class="img-movie img-fluid shadow p-2 bg-body-tertiary rounded"
-                [src]="getImage(media.file_path, 200, 300)"
+                [src]="getImage(media?.file_path, 200, 300)"
               />
               <button class="view">
                 <fa-icon [icon]="faEye"></fa-icon>
@@ -117,20 +121,20 @@
           </div>
         </div>
       </div>
-      <div>
-        <div class="pb-3">
+      <div *ngIf="movieInfo.images?.logos?.length > 0">
+        <div class="pt-2 pb-2">
           <h5><b class="divider-title">|</b> Logos</h5>
         </div>
         <div class="d-flex flex-wrap">
           <div
             class="col-md-3 col-3 col-lg-3 p-2"
-            *ngFor="let media of movieInfo.images.logos"
+            *ngFor="let media of movieInfo.images?.logos"
           >
-            <div (click)="goToImage(media.file_path)" class="card">
+            <div (click)="goToImage(media?.file_path)" class="card">
               <img
                 alt="image"
                 class="img-movie img-fluid shadow p-2 bg-body-tertiary rounded"
-                [src]="getImage(media.file_path, 200, 300)"
+                [src]="getImage(media?.file_path, 200, 300)"
               />
               <button class="view">
                 <fa-icon [icon]="faEye"></fa-icon>
@@ -139,20 +143,20 @@
           </div>
         </div>
       </div>
-      <div>
-        <div class="pb-3">
+      <div *ngIf="movieInfo.images?.posters?.length > 0">
+        <div class="pt-2 pb-2">
           <h5><b class="divider-title">|</b> Posters</h5>
         </div>
         <div class="d-flex flex-wrap">
           <div
             class="col-md-3 col-3 col-lg-3 p-2"
-            *ngFor="let media of movieInfo.images.posters"
+            *ngFor="let media of movieInfo.images?.posters"
           >
-            <div (click)="goToImage(media.file_path)" class="card">
+            <div (click)="goToImage(media?.file_path)" class="card">
               <img
                 alt="image"
                 class="img-movie img-fluid shadow p-2 bg-body-tertiary rounded"
-                [src]="getImage(media.file_path, 200, 300)"
+                [src]="getImage(media?.file_path, 200, 300)"
               />
               <button class="view">
                 <fa-icon [icon]="faEye"></fa-icon>
@@ -167,7 +171,7 @@
     <br *ngIf="videos" />
     <div class="container" *ngIf="videos != undefined">
       <h5><b class="divider-title">|</b> Ver Película</h5>
-      <div class="d-flex flex-wrap">
+      <div class="d-flex align-items-center flex-wrap">
         <div
           *ngIf="videos.latino.length > 0"
           id="latino"
@@ -180,7 +184,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Idioma Latino <fa-icon [icon]="faDropwdown"></fa-icon>
+            Idioma Latino
           </a>
 
           <ul class="dropdown-menu">
@@ -203,7 +207,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Idioma Español <fa-icon [icon]="faDropwdown"></fa-icon>
+            Idioma Español
           </a>
           <ul class="dropdown-menu">
             <li *ngFor="let item of videos.spanish">
@@ -225,7 +229,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Idioma Japones <fa-icon [icon]="faDropwdown"></fa-icon>
+            Idioma Japones
           </a>
           <ul class="dropdown-menu">
             <li *ngFor="let item of videos.japanese">
@@ -247,7 +251,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Idioma Inglés <fa-icon [icon]="faDropwdown"></fa-icon>
+            Idioma Inglés
           </a>
 
           <ul class="dropdown-menu">
@@ -258,7 +262,12 @@
             </li>
           </ul>
         </div>
-        <div id="download" class="flex dropdown pt-3 pe-2">Descarga</div>
+        <div class="ms-md-auto ms-0 ms-sm-0 ms-lg-auto flex pt-3 pe-2">
+          <button class="btn-download" (click)="goToDownload()">
+            <fa-icon [icon]="faDownload"></fa-icon>
+            Descargar
+          </button>
+        </div>
       </div>
       <div class="pt-2">
         <iframe

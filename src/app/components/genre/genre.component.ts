@@ -3,6 +3,7 @@ import { MediaType } from 'src/app/interfaces/types';
 import * as iconos from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InformationService } from 'src/app/services/information.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-genre',
@@ -19,12 +20,18 @@ export class GenreComponent {
   faStarOutline = iconos.faStar;
   throttle = 50;
   scrollDistance = 1;
+  loading = false;
 
   constructor(
     private route: ActivatedRoute,
+    private loadingService: LoadingService,
     private router: Router,
     private infoService: InformationService
-  ) {}
+  ) {
+    this.loadingService.loading$.subscribe((loading) => {
+      this.loading = loading;
+    });
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {

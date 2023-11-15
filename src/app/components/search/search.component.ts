@@ -4,6 +4,7 @@ import * as iconos from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InformationService } from 'src/app/services/information.service';
 import { Subject, debounceTime } from 'rxjs';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-search',
@@ -20,12 +21,18 @@ export class SearchComponent {
   throttle = 50;
   scrollDistance = 1;
   faSearch = iconos.faSearch;
+  loading = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private loadingService: LoadingService,
     private infoService: InformationService
-  ) {}
+  ) {
+    this.loadingService.loading$.subscribe((loading) => {
+      this.loading = loading;
+    });
+  }
 
   ngOnInit() {
     this.searchSubject.pipe(debounceTime(500)).subscribe((searchTerm) => {

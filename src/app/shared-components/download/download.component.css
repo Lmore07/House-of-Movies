@@ -1,0 +1,65 @@
+/* Estilos generales */
+
+body{
+  max-height: 90vh;
+  background-color: white;
+}
+
+.video-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .video-table td, .video-table th {
+    padding: 12px 15px;
+    text-align: left;
+  }
+  
+  /* Encabezados */
+  
+  .video-table thead th {
+    background: #007bff; 
+    color: #fff;
+  }
+  
+  /* Celdas */ 
+  
+  .video-table tbody td {
+    color: #333;
+    background-color: white;
+  }
+  
+  /* Botón de descarga */
+  
+  .download-btn {
+    background: #007bff;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .download-btn:hover {
+    background: #0069d9;
+  }
+  
+  /* Responsive */
+  
+  @media (max-width: 500px) {
+    .video-table thead {
+      display: none;
+    }
+    
+    .video-table td {
+      display: block; 
+      text-align: right;
+    }
+    
+    .video-table td::before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+    }
+  }

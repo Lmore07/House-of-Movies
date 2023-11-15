@@ -1,6 +1,7 @@
 import { Component, HostListener, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { InformationService } from 'src/app/services/information.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { QUERY_LIST } from 'src/constants/lists';
 
 @Component({
@@ -17,8 +18,16 @@ export class HomeComponent {
   @Output() carouselExample2: string = 'carouselExample2';
   @Output() arrayVideosDetail1!: any[];
   @Output() arrayVideosDetail2!: any[];
-
-  constructor(private infoService: InformationService, public ruta: Router) {}
+  loading = false;
+  constructor(
+    private infoService: InformationService,
+    private loadingService: LoadingService,
+    public ruta: Router
+  ) {
+    this.loadingService.loading$.subscribe((loading) => {
+      this.loading = loading;
+    });
+  }
 
   ngOnInit() {
     this.queries.forEach((query) => {

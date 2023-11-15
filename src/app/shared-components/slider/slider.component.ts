@@ -63,11 +63,9 @@ export class SliderComponent {
   }
 
   goToVideoDetail(video: any) {
-    this.ruta
-      .navigate(['/movie', video.id], { skipLocationChange: false })
-      .then(() => {
-        this.ruta.navigate(['/movie', video.id]);
-      });
+    this.ruta.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.ruta.navigate(['/movie', video.id]);
+    });
   }
 
   maxStars = 5;

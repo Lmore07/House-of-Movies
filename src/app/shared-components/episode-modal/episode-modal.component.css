@@ -37,3 +37,28 @@ p{
     text-align: left;
     color: black;
 }
+
+.btn-download {
+    background: #dc3545; 
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    padding: 12px 24px;
+  
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: 0.3s;
+  }
+  
+  .btn-download:hover {
+    background: #bb2d3b;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+  
+  .btn-download fa-icon {
+    font-size: 18px;
+  }

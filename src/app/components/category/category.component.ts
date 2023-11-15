@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MediaType } from 'src/app/interfaces/types';
 import { InformationService } from 'src/app/services/information.service';
 import * as iconos from '@fortawesome/free-solid-svg-icons';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-category',
@@ -18,12 +19,18 @@ export class CategoryComponent {
   faStarOutline = iconos.faStar;
   throttle = 50;
   scrollDistance = 1;
+  loading = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private loadingService: LoadingService,
     private infoService: InformationService
-  ) {}
+  ) {
+    this.loadingService.loading$.subscribe((loading) => {
+      this.loading = loading;
+    });
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {

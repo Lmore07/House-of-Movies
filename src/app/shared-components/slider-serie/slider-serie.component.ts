@@ -7,7 +7,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import * as iconos from '@fortawesome/free-solid-svg-icons';
 import { InformationService } from 'src/app/services/information.service';
 import { register } from 'swiper/element/bundle';
@@ -77,10 +77,8 @@ export class SliderSerieComponent implements OnChanges {
   }
 
   goToVideoDetail(video: any) {
-    this.route
-      .navigate(['/serie', video.id], { skipLocationChange: false })
-      .then(() => {
-        this.route.navigate(['/serie', video.id]);
-      });
+    this.route.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.route.navigate(['/serie', video.id]);
+    });
   }
 }
