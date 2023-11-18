@@ -47,8 +47,10 @@ export class EpisodeModalComponent {
   }
 
   loadVideosApiOne() {
+    console.log(this.data.link);
     let url = this.data.link.url.slug
       .replace('series', 'serie')
+      .replace('movies', 'serie')
       .replace('seasons', 'temporada')
       .replace('episodes', 'episodio');
     this.viewService.viewAndDownloadSerie(url).subscribe(
