@@ -59,7 +59,7 @@
                 <h4 class="info">
                   <b>Genero:</b>
                   <mat-chip-listbox>
-                    <mat-chip *ngFor="let genre of movieInfo.genres">
+                    <mat-chip [routerLink]="'/genre/' + genre.id + '/' + 'movie'" *ngFor="let genre of movieInfo.genres">
                       {{ genre.name }}
                     </mat-chip>
                   </mat-chip-listbox>
