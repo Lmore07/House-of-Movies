@@ -96,8 +96,10 @@ export class GenreComponent {
   }
 
   goToVideoDetail(video: any) {
+    console.log(video);
+    console.log(this.type)
     this.router.navigateByUrl(
-      this.type == 'movie' ? 'movie' : 'serie' + '/' + video.id
+      this.type+'/'+video.id
     );
   }
 

@@ -1,7 +1,7 @@
+import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,9 +9,7 @@ import { environment } from 'src/environments/environment';
 export class ViewService {
   constructor(private http: HttpClient) {}
 
-  apiBaseUrlView =
-    'https://corsproxy.io/?' +
-    encodeURIComponent(environment.API_BASE_URL_VIEW);
+  apiBaseUrlView = 'https://corsproxy.io/?';
   apiBaseUrlView2 =
     'https://corsproxy.io/?' +
     encodeURIComponent(environment.API_BASE_URL_VIEW_2);
@@ -22,7 +20,10 @@ export class ViewService {
     params: Record<string, string | number | boolean | undefined> = {}
   ): Observable<any> {
     return this.http.get(
-      `${this.apiBaseUrlView}/_next/data/${this.apiToken}/es/${url}`,
+      'https://corsproxy.io/?' +
+        encodeURIComponent(
+          `${environment.API_BASE_URL_VIEW}/_next/data/${this.apiToken}/es/${url}`
+        ),
       params
     );
   }
