@@ -15,13 +15,14 @@ export class ViewService {
   apiBaseUrlView2 =
     'https://corsproxy.io/?' +
     encodeURIComponent(environment.API_BASE_URL_VIEW_2);
+  apiToken = environment.TOKEN;
 
   _fetchView(
     url: string,
     params: Record<string, string | number | boolean | undefined> = {}
   ): Observable<any> {
     return this.http.get(
-      `${this.apiBaseUrlView}/_next/data/t-o8qzUG_bXUPhUqP0bdm/es/${url}`,
+      `${this.apiBaseUrlView}/_next/data/${this.apiToken}/es/${url}`,
       params
     );
   }
@@ -42,7 +43,7 @@ export class ViewService {
   }
 
   viewAndDownloadSerie(url: string) {
-    return this.fetchView(`${url}.json`,{});
+    return this.fetchView(`${url}.json`, {});
   }
 
   //API NUMERO 2 POR SI LA 1 FALLA
