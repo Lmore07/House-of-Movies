@@ -52,6 +52,10 @@ export class InformationMovieComponent {
     });
   }
 
+  returnCorsProxy(url: string) {
+    return 'https://corsproxy.io/?' + encodeURIComponent(`${url}`);
+  }
+
   goToVideo(id: string) {
     this.dialog.open(WatchVideoInfoComponent, {
       data: {
@@ -89,7 +93,7 @@ export class InformationMovieComponent {
     this.viewService.viewAndDownloadMovie(this.movieId).subscribe(
       (data) => {
         this.videos = data.pageProps.thisMovie.videos;
-        this.videoSelected = this.videos.latino[0].result;
+        this.videoSelected = this.returnCorsProxy(this.videos.latino[0].result);
         this.download = data.pageProps.thisMovie.downloads;
       },
       (error) => {
@@ -107,7 +111,7 @@ export class InformationMovieComponent {
   }
 
   changeServer(url: string) {
-    this.videoSelected = url;
+    this.videoSelected = this.returnCorsProxy(url);
   }
 
   safeUrl(url: string) {

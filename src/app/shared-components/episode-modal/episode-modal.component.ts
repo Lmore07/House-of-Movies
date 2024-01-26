@@ -25,7 +25,7 @@ export class EpisodeModalComponent {
     private sanitizer: DomSanitizer,
     public dialog: MatDialog,
     private viewService: ViewService
-  ) {}
+  ) { }
 
   faDropwdown = iconos.faChevronDown;
   videosLatino!: any;
@@ -57,12 +57,16 @@ export class EpisodeModalComponent {
       (data) => {
         this.videosApi1 = data.pageProps.episode.videos;
         this.download = data.pageProps.episode.videos;
-        this.videoSelected = this.videosApi1.latino[0].result;
+        this.videoSelected = this.returnCorsProxy(this.videosApi1.latino[0].result);
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  returnCorsProxy(url: string) {
+    return 'https://corsproxy.io/?' + encodeURIComponent(`${url}`);
   }
 
   goToDownload() {
@@ -96,7 +100,7 @@ export class EpisodeModalComponent {
     this.videosSpanish = this.videos.filter(
       (objeto) => objeto.audio == 'ESPAÑOL'
     );
-    this.videoSelected = this.videosLatino[0].url;
+    this.videoSelected = this.returnCorsProxy(this.videosLatino[0].url);
   }
 
   safeUrl(url: string) {
@@ -109,6 +113,6 @@ export class EpisodeModalComponent {
   }
 
   changeServer(url: string) {
-    this.videoSelected = url;
+    this.videoSelected = this.returnCorsProxy(url);
   }
 }
