@@ -108,7 +108,7 @@ export class InformationSerieComponent implements OnDestroy, OnInit {
 
   getSeasonsSerie() {
     this.viewService
-      .getSerieInfo(this.serieId, this.cleanString(this.infoSerie.name))
+      .getSerieInfo(this.serieId, this.infoSerie.name)
       .subscribe(
         (data) => {
           this.api = 'One';

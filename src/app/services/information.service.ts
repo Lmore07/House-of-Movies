@@ -64,13 +64,13 @@ export class InformationService {
 
   getInfoMovieSerie(type: MediaType, tmdb: number) {
     return this.fetchTMDB(
-      `${type}/${tmdb}?append_to_response=videos,images,credits,external_ids,release_dates,combined_credits&include_image_language=en&language=es-EC`
+      `${type}/${tmdb}?append_to_response=videos,images,credits,external_ids,release_dates,combined_credits&include_image_language=en`
     );
   }
 
   getInfoPerson(id: number) {
     return this.fetchTMDB(
-      `person/${id}?append_to_response=videos,images,external_ids,combined_credits&include_image_language=en&language=es-ES`
+      `person/${id}?append_to_response=videos,images,external_ids,combined_credits&include_image_language=en`
     );
   }
 
