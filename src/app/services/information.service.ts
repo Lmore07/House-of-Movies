@@ -17,7 +17,7 @@ export class InformationService {
     param: Record<string, string | number | boolean | undefined> = {}
   ): Observable<any> {
     let params = new HttpParams()
-      .set('language', 'es-ES')
+      .set('language', 'es-MX')
       .set('page', param['page']?.toString() ? param['page'].toString() : 1);
     if (param['include_adult'] != undefined) {
       params = params.append('include_adult', param['include_adult']);
