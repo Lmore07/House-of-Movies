@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ViewService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   apiBaseUrlView = 'https://corsproxy.io/?';
   apiBaseUrlView2 =
@@ -19,11 +19,10 @@ export class ViewService {
     url: string,
     params: Record<string, string | number | boolean | undefined> = {}
   ): Observable<any> {
+    let routeCuevana = 'https://cors-anywhere.herokuapp.com/' +
+      `${environment.API_BASE_URL_VIEW}/_next/data/${this.apiToken}/es/${url}`;
     return this.http.get(
-      'https://corsproxy.io/?' +
-        encodeURIComponent(
-          `${environment.API_BASE_URL_VIEW}/_next/data/${this.apiToken}/es/${url}`
-        ),
+      routeCuevana,
       params
     );
   }
